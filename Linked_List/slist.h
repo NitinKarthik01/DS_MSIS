@@ -7,7 +7,7 @@ typedef struct _node_ Node;
 typedef struct _list_ List;
 
 struct _node_ {
-    uint32_t data;
+    uint32_t data;  
     Node *next;
 };
 
@@ -17,20 +17,35 @@ struct _list_ {
     uint32_t length;
 };
 
-List *slist_new();
-List *slist_free(List *list);
+List *slist_new(); 
+List *slist_free(List *list); 
 
-uint32_t slist_length(List *list);
-Node *slist_lookup(List *list, uint32_t key);
+uint32_t slist_length(List *list); 
+Node *slist_lookup(List *list, uint32_t key); 
 
-List *slist_add_head(List *list, uint32_t data);
-List *slist_add_tail(List *list, uint32_t data);
+List *slist_add_head(List *list, uint32_t data); 
+List *slist_add_tail(List *list, uint32_t data); 
 
-List *slist_delete_head(List *list);
-List *slist_delete_tail(List *list);
+List *slist_delete_head(List *list); 
+List *slist_delete_tail(List *list); 
 
 List *add_in_between(List *list, uint32_t key, uint32_t data);
 
 void display_list(List *list);
 
+
+
+List* slist_add_on_data(List *list,uint32_t key, uint32_t data); 
+List* slist_delete_bw(List *list); //done
+List* slist_delete_on_data(List *list, uint32_t data); 
+List* slist_rev(List *list);
+List *slist_remove_dup(List *list);
+void slist_find_nth_node(List *list);
+void slist_find_nth_node_in_reverse(List *list, int32_t pos);
+void slist_min_max(List *list); 
+
+
+List* slist_union(List *list1, List *list2);
+List* slist_intersection(List *list1, List *list2);
+List* slist_difference(List *list1, List *list2);
 #endif
