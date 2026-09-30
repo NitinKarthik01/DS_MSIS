@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1790736318 source:c:\users\msis\documents\ds_msis\bst\bst.c
+
+1740933562 source:c:\users\msis\documents\ds_msis\bst\main.c
+	<stdio.h>
+	<stdlib.h>
+
