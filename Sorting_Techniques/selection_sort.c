@@ -1,33 +1,37 @@
-#include<stdio.h>
+#include <stdio.h>
 
-void Selection_Sort(int A[],int n)
+void Selection_Sort(int a[], int len)
 {
-    int min;
-    for(int i=0;i<n;i++)
+    int i, j, temp;
+    for (i=0; i<len; i++)
     {
-        min = i ;
-        for(int j = i+1 ; j<n; j++)
+        int min = i;
+        for(j = i+1; j< len; j++)
         {
-            if(A[j]<A[min])
+            if(a[j] < a[min])
             {
                 min = j;
             }
         }
-        int temp = A[i];
-        A[i] = A[min];
-        A[min] = temp;
+        temp = a[i];
+        a[i] = a[min];
+        a[min] = temp;    
     }
 }
 
 int main()
 {
-    int A[] = {10,2,1,5,7,9,11,10,14};
-    int n = 9;
-
-    Selection_Sort(A,n);
-    for(int i = 0;i<n ; i++)
+    int A[] = {12, 30, 50, 20, 50, 11, 23, 28};
+    int len = 8;
+    for(int i =0; i<len; i++)
     {
         printf("%d ",A[i]);
     }
-    return 0;
+    printf("\n\n");
+    Selection_Sort(A, len);
+    for(int i =0; i<len; i++)
+    {
+        printf("%d ",A[i]);
+    }
+
 }
