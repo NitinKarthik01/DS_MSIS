@@ -387,11 +387,9 @@ List* slist_delete_on_data(List *list, uint32_t key)
         return list;
     }
 
-    Node *p, *q;
-    p = list -> head;
-    q = list -> tail;
+    Node *p = list->head;
 
-    if(p == q)
+    if(current == p && list->head == list->tail)
     {
         free(p);
         list->head = list->tail = NULL;
@@ -435,8 +433,8 @@ void slist_min_max(List *list)
     if(list->head!=NULL)
     {
         Node *p = list->head;
-        int max = p->data;
-        int min = p->data;
+        int max, min;
+        max = min = p->data;
         for(p=p->next;p!=NULL;p=p->next)
         {
             if(p->data > max)
