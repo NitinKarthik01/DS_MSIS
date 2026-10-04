@@ -33,14 +33,12 @@ List *add_in_between(List *list, uint32_t key, uint32_t data);
 
 void display_list(List *list);
 
-
-
 List* slist_add_on_data(List *list,uint32_t key, uint32_t data); 
 List* slist_delete_bw(List *list); //done
 List* slist_delete_on_data(List *list, uint32_t data); 
 List* slist_rev(List *list);
 List *slist_remove_dup(List *list);
-void slist_find_nth_node(List *list);
+List* slist_find_nth_node(List *list, int32_t pos);
 void slist_find_nth_node_in_reverse(List *list, int32_t pos);
 void slist_min_max(List *list); 
 

@@ -320,8 +320,10 @@ void display_list(List *list)
 }
 
 
-List* slist_delete_on_data(List *list,uint32_t key)
-{
+/*List* slist_delete_on_data(List *list,uint32_t key)
+/* 1. check for whether the data node is head or not? if yes you need to write a ocndition for that
+   2. check for tail condition in every iteration */
+/*{
     if(list==NULL)
     {
         return NULL;
@@ -368,6 +370,58 @@ List* slist_delete_on_data(List *list,uint32_t key)
 
     }
     return list;
+}*/
+
+
+List* slist_delete_on_data(List *list, uint32_t key)
+{
+    if(list == NULL)
+    {
+        return NULL;
+    }
+
+    Node *current = slist_lookup(list, key);
+
+    if (current == NULL)
+    {
+        return list;
+    }
+
+    Node *p, *q;
+    p = list -> head;
+    q = list -> tail;
+
+    if(p == q)
+    {
+        free(p);
+        list->head = list->tail = NULL;
+        list -> length = 0;
+        return list;
+    }
+
+    if(p == current)
+    {
+        list->head = list -> head -> next;
+        free(p);
+        --list->length;
+        return list;
+    }
+
+    while (p->next != current)
+    {
+        p = p->next;
+    }
+    p -> next = current -> next;
+
+    free(current);
+    --list->length;
+
+    if(p->next == NULL)
+    {
+        list->tail = p;
+    }
+    return list;
+
 }
 
 
@@ -439,13 +493,12 @@ List *slist_remove_dup(List *list)
             if(p->data == q->data)
             {
                 temp->next = q->next;
-                Node *next = q->next;
                 if (q == list->tail)
                 {
                     list->tail = temp;
                 }
                 free(q);
-                q = next;
+                q = temp->next;
                 --list->length;
             }
             else
@@ -460,11 +513,11 @@ List *slist_remove_dup(List *list)
 }
 
 
-void slist_find_nth_node(List *list, int32_t pos)
+/*List* slist_find_nth_node(List *list, int32_t pos)
 {
     if(list==NULL)
     {
-        return;
+        return NULL;
     }
     if(pos <= list->length && pos>0)
     {
@@ -480,7 +533,29 @@ void slist_find_nth_node(List *list, int32_t pos)
             printf("Data @ %dth position = %d\n",pos,p->data);
         }
     }
-    return;
+    return list;
+}*/
+
+List* slist_find_nth_node(List *list, uint32_t pos)
+{
+    if(list == NULL)
+    {
+        return NULL;
+    }
+
+    if(pos > 0  && pos <= list -> length)
+    {
+        int count = 1;
+        Node *current = list -> head;
+
+        while(count != pos)
+        {
+            current = current->next;
+            count++;
+        }
+        printf("Data @ %dth position = %d\n",pos,current->data);
+    }
+    return list;
 }
 
 void slist_find_nth_node_in_reverse(List *list,int32_t pos)
@@ -524,8 +599,6 @@ List* slist_union(List *list1, List *list2)
     return result;
 }
 
-
-
 List* slist_intersection(List *list1, List *list2)
 {
     if(list1 == NULL || list2 == NULL)
@@ -544,7 +617,7 @@ List* slist_intersection(List *list1, List *list2)
 
     while(p!=NULL)
     {
-        q = list2->head;
+        /*q = list2->head;
         while(q!=NULL)
         {
             if(p->data == q->data && slist_lookup(result, p->data) == NULL)
@@ -552,6 +625,11 @@ List* slist_intersection(List *list1, List *list2)
                 slist_add_tail(result, p->data);
             }
             q = q->next;
+        }*/
+
+        if(slist_lookup(list2, p->data)!=NULL &&slist_lookup(result,p->data)==NULL)
+        {
+            slist_add_tail(result, p->data);
         }
         p = p->next;
     }
@@ -572,7 +650,7 @@ List* slist_difference(List *list1, List *list2)
     {
         return NULL;
     }
-    Node *p, *q;
+    Node *p;
     
     p = list1->head;
 
