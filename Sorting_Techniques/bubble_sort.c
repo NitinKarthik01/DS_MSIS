@@ -1,6 +1,6 @@
 #include<stdio.h>
 
-void Insertion_Sort(int A[],int n)
+void Bubble_Sort(int A[],int n)
 {
     for (int i = n-1; i>=0; i--)
     {
@@ -22,7 +22,7 @@ int main()
     int A[] = {10,2,1,5,7,9,11,10,14};
     int n = 9;
 
-    Insertion_Sort(A,n);
+    Bubble_Sort(A,n);
     for(int i = 0;i<n ; i++)
     {
         printf("%d ",A[i]);

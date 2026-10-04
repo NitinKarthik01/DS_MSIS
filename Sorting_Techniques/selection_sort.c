@@ -6,7 +6,7 @@ void Selection_Sort(int a[], int len)
     for (i=0; i<len; i++)
     {
         int min = i;
-        for(j = i+1; j< len; j++)
+        for(j = i+1; j<len; j++)
         {
             if(a[j] < a[min])
             {
