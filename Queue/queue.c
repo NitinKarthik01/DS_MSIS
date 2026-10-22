@@ -2,6 +2,8 @@
 #include<assert.h>
 #include "queue.h"
 
+// insert and increment tail
+// access and increment head
 Queue queue_new(uint32_t size)
 {
     size = (size > 0 && size < MAX_QUEUE_LEN)? size : MAX_QUEUE_LEN;

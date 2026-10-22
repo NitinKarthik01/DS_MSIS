@@ -26,7 +26,7 @@ BST * best_add(BST *tree, int32_t key)
 
     while(root!=NULL && root->key!=key)
     {
-        parent = root;
+        parent = root;                  
         if(key<root->key)
         {
             root = root->left;
